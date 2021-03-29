@@ -11,14 +11,17 @@ export const TrafficLight: React.FC<TrafficLightProps> = ({
   const trafficLightColor = useTrafficLight(initialColor);
 
   return (
-    <>
+    <div style={{
+      display: 'inline-block',
+      margin: '2rem'
+    }}>
       <div
         style={{
           height: 100,
           width: 100,
           borderRadius: '50%',
           backgroundColor:
-            trafficLightColor === TrafficLightColor.Red ? 'red' : '#5a3838'
+            trafficLightColor === TrafficLightColor.Red ? 'red' : '#280000'
         }}
       />
       <div
@@ -29,7 +32,7 @@ export const TrafficLight: React.FC<TrafficLightProps> = ({
           backgroundColor:
             trafficLightColor === TrafficLightColor.Yellow
               ? 'yellow'
-              : '#726d42'
+              : '#282800'
         }}
       />
       <div
@@ -40,9 +43,9 @@ export const TrafficLight: React.FC<TrafficLightProps> = ({
           backgroundColor:
             trafficLightColor === TrafficLightColor.Green
               ? 'lawngreen'
-              : '#376b37'
+              : '#002800'
         }}
       />
-    </>
+    </div>
   );
 };
