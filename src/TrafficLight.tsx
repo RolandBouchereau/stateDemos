@@ -11,10 +11,12 @@ export const TrafficLight: React.FC<TrafficLightProps> = ({
   const trafficLightColor = useTrafficLight(initialColor);
 
   return (
-    <div style={{
-      display: 'inline-block',
-      margin: '2rem'
-    }}>
+    <div
+      style={{
+        display: 'inline-block',
+        margin: '2rem'
+      }}
+    >
       <div
         style={{
           height: 100,

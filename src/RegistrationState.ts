@@ -1,18 +1,18 @@
-import { useMemo } from "react";
-import { Effects, useEffectReducer } from "./useEffectReducer";
-import { tuple } from "./utility";
+import { useMemo } from 'react';
+import { Effects, useEffectReducer } from './useEffectReducer';
+import { tuple } from './utility';
 
 export enum FormState {
-  Updating = "Updating",
+  Updating = 'Updating',
   // Validating,
-  Validated = "Validated",
-  Submitting = "Submitting",
-  Submitted = "Submitted",
+  Validated = 'Validated',
+  Submitting = 'Submitting',
+  Submitted = 'Submitted'
 }
 
 export enum Gender {
-  Female = "female",
-  Male = "male",
+  Female = 'female',
+  Male = 'male'
 }
 
 export type RegistrationData = {
@@ -45,14 +45,13 @@ const updateField = (
   }
 
   if (!(fieldName in state.registrationData)) {
-    console.warn("Unrecognized RegistrationData field name.");
+    console.warn('Unrecognized RegistrationData field name.');
     return [state, []];
   }
 
   const registrationData = {
     ...state.registrationData,
-    [fieldName]:
-      typeof fieldValue === "string" ? fieldValue.trim() : fieldValue,
+    [fieldName]: typeof fieldValue === 'string' ? fieldValue.trim() : fieldValue
   };
   return [{ ...state, registrationData }, []];
 };
@@ -69,10 +68,10 @@ type Validate = {
 
 const validate: Validate = {
   acceptedAgreement({
-    acceptedAgreement,
+    acceptedAgreement
   }: RegistrationData): string | undefined {
     if (!acceptedAgreement) {
-      return "Your must agree to the terms of use agreement.";
+      return 'Your must agree to the terms of use agreement.';
     }
   },
   dob({ dob }: RegistrationData): string | undefined {
@@ -82,16 +81,16 @@ const validate: Validate = {
     return;
   },
   firstName({ firstName }: RegistrationData): string | undefined {
-    if (firstName === "") {
-      return "First name is required.";
+    if (firstName === '') {
+      return 'First name is required.';
     }
   },
   gender({ gender }: RegistrationData): string | undefined {
     return;
   },
   lastName({ lastName }: RegistrationData): string | undefined {
-    if (lastName === "") {
-      return "Last name is required.";
+    if (lastName === '') {
+      return 'Last name is required.';
     }
   },
   phone({ phone }: RegistrationData): string | undefined {
@@ -99,7 +98,7 @@ const validate: Validate = {
   },
   state({ state }: RegistrationData): string | undefined {
     return;
-  },
+  }
 };
 
 const validateField = (fieldName: RegistrationDataKey) => (
@@ -160,9 +159,9 @@ const validateRegistrationData = (state: State): [State, Effects<State>] => {
     {
       ...state,
       formState: newFormState,
-      validationErrors: newValidationErrors,
+      validationErrors: newValidationErrors
     },
-    [],
+    []
   ];
 };
 
@@ -208,25 +207,25 @@ const submissionFailed = (state: State): [State, Effects<State>] => {
 const logToConsole = (msg: string) => (
   state: State
 ): [State, Effects<State>] => {
-  console.log("logging console message:", msg);
+  console.log('logging console message:', msg);
   return [state, []];
 };
 
 const emptyRegistrationData: RegistrationData = {
   acceptedAgreement: false,
-  dob: "",
-  email: "",
-  firstName: "",
+  dob: '',
+  email: '',
+  firstName: '',
   gender: Gender.Female,
-  lastName: "",
-  phone: "",
-  state: "",
+  lastName: '',
+  phone: '',
+  state: ''
 };
 
 const initialState: State = {
   formState: FormState.Updating,
   registrationData: emptyRegistrationData,
-  validationErrors: {},
+  validationErrors: {}
 };
 
 type RegistrationActions = {
@@ -274,7 +273,7 @@ export const useRegistrationState: () => [State, RegistrationActions] = () => {
           simulateSubmission()
             .then(submissionSucceededSync)
             .catch(submissionFailedSync)
-        ),
+        )
     };
   }, [dispatch]);
 

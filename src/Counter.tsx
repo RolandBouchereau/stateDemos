@@ -4,10 +4,10 @@ import { isOddCount, useCountState } from './BasicCountState';
 export const Counter = () => {
   const [
     state,
-    { increment, decrement, incrementIfOdd, bump, resetAsync },
+    { increment, decrement, incrementIfOdd, bump, resetAsync }
   ] = useCountState();
 
-  const disabled = false;//!isAvailable(state);
+  const disabled = false; //!isAvailable(state);
 
   return (
     <div>
